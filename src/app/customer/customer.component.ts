@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ServiceNowService } from '../service-now.service';
 import { CustomerModel } from '../customer-model';
@@ -10,16 +10,20 @@ import { CustomerModel } from '../customer-model';
 })
 export class CustomerComponent {
 
+
+  PHONE_REGEX = /^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/;
   addressForm = this.fb.group({
-    date: [null, Validators.required],
-    company: null,
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    address: [null, Validators.required],
-    address2: null,
-    city: ['Raleigh', Validators.required],
-    state: ['NC', Validators.required],
-    postalCode: [null, Validators.compose([
+    u_date: [null, Validators.required],
+    u_company: [null],
+    u_name: [null, Validators.required],
+    u_phone: [null, Validators.compose([Validators.required, Validators.pattern(this.PHONE_REGEX)])],
+    u_description: [null, Validators.maxLength(799)],
+    u_email: [null,  Validators.compose([Validators.email, Validators.required])],
+    u_street_address: [null, Validators.required],
+    u_address_line_2: [null],
+    u_city: ['Raleigh', Validators.required],
+    u_state: ['NC', Validators.required],
+    u_zip: [null, Validators.compose([
       Validators.required, Validators.minLength(5), Validators.maxLength(5)])
     ]
   });
@@ -89,17 +93,24 @@ export class CustomerComponent {
   ];
   error: any;
   results: any;
+  submitted: boolean;
 
   constructor(private fb: FormBuilder, private serviceNowService: ServiceNowService) { }
 
   onSubmit() {
+
     // console.log('the form = ', this.addressForm);
+    this.submitted = true;
     this.serviceNowService.createSNRequest(this.addressForm.value)
       .subscribe((data) => {
         this.results = data;
         console.log(data);
       }, error => {
         this.error = error;
+      },
+      () => {
+        this.submitted = false;
       });
   }
+
 }

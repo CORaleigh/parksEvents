@@ -11,12 +11,14 @@ export class ServiceNowService {
   constructor(private http: HttpClient) { }
 
   private url = 'https://raleighncdev.service-now.com/api/now/table/u_stg_public_records_request';
-  private api_key = 'prriu';
+  private user = 'prriu';
   private password = 'Wn9szf4BYd??5dL&';
 
-  private auth = btoa(`${this.api_key} : ${this.password}`);
+  // private auth = btoa(unescape(encodeURIComponent(`${this.user} : ${this.password}`)));  not sure why this doesn't work.
+  private auth = btoa(unescape(encodeURIComponent(this.user + ':' + this.password)));
 
-  createSNRequest(formdata: string): Observable<CustomerModel> {
+
+  createSNRequest(formdata: string): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -26,8 +28,8 @@ export class ServiceNowService {
       })
     };
 
-    const formdataStr = JSON.stringify(formdata);
-    return this.http.post(this.url, formdataStr, httpOptions);
+    // const formdataStr = JSON.stringify(formdata);
+    return this.http.post(this.url, formdata, httpOptions);
   }
 
   private handleError(error: HttpErrorResponse) {
