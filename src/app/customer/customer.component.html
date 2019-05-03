@@ -1,9 +1,25 @@
+<mat-toolbar>
+    <a href="http://www.raleighnc.gov/">
+      <img alt="City of Raleigh Logo" class="logo" src="./assets/Raleigh-Logo-Horiz-white.png">
+    </a>
+    <span class="mat-toolbar-row">Public Records Request</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog('help')">
+      <mat-icon>help</mat-icon>
+      <span>Need Help?</span>
+    </button>
+  </mat-menu>
 <form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Public Records Request</mat-card-title>
+      <mat-card-title>Enter your information</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="shipping-card">
       <div class="row">
         <div class="col">
           <mat-form-field>
@@ -127,7 +143,7 @@
         There was a problem communicating to the backend server. We are working on correcting the issue. Please try
         your request again later.
       </mat-error>
-      <span *ngIf="results">Your request was submitted successfully. Your request ID is {{results}}.</span>
+      <span *ngIf="results">Your request was submitted successfully. Your request ID is {{this.results.result.sys_id}}.</span>
 
   </mat-card>
 </form>

@@ -104,7 +104,7 @@ export class CustomerComponent {
     this.serviceNowService.createSNRequest(this.addressForm.value)
       .subscribe((data) => {
         this.results = data;
-        console.log(data);
+        console.log(this.results);
       }, error => {
         this.error = error;
       },
