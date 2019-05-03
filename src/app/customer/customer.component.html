@@ -9,7 +9,8 @@
   </mat-toolbar>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openDialog('help')">
+    <button mat-menu-item > 
+        <!-- (click)="openDialog('help')" -->
       <mat-icon>help</mat-icon>
       <span>Need Help?</span>
     </button>
@@ -133,7 +134,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!addressForm.valid">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!addressForm.valid || results">Submit</button>
     </mat-card-actions>
 
     <mat-progress-bar *ngIf="submitted && !error" class="app-progress" mode="indeterminate"
