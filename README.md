@@ -1,8 +1,8 @@
-# PublicRecordsRequest
+# parksEvents
 
 git push -u origin master
-ng build --prod --base-href "/publicRecordsRequest/"
-npx ngh --dir=dist/publicRecordsRequest
+ng build --prod --base-href "/parksEvents/"
+npx ngh --dir=dist/parksEvents
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 

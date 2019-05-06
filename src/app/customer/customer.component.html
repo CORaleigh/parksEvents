@@ -1,8 +1,8 @@
-<!-- <mat-toolbar>
+<mat-toolbar>
     <a href="http://www.raleighnc.gov/">
       <img alt="City of Raleigh Logo" class="logo" src="./assets/Raleigh-Logo-Horiz-white.png">
     </a>
-    <span class="mat-toolbar-row">Public Records Request</span>
+    <!-- <span class="mat-toolbar-row">Parks Event Logistics Request</span> -->
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -11,37 +11,47 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item >  -->
         <!-- (click)="openDialog('help')" -->
-      <!-- <mat-icon>help</mat-icon>
+       <mat-icon>help</mat-icon>
       <span>Need Help?</span>
     </button>
-  </mat-menu> -->
+  </mat-menu>
 <form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Enter your information</mat-card-title>
+      <mat-card-title>Parks Event Logistics Request</mat-card-title>
     </mat-card-header>
     <mat-card-content class="shipping-card">
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="u_date">
+            <input matInput [matDatepicker]="picker" placeholder="Event date" formControlName="date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Company Name" formControlName="company">
+          </mat-form-field>
+        </div>
+      </div>  -->
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Company Name" formControlName="u_company">
+            <input matInput placeholder="Event Name" formControlName="eventName">
+            <mat-error *ngIf="addressForm.controls['eventName'].hasError('required')">
+              Event name is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Email" formControlName="u_email">
-            <mat-error *ngIf="addressForm.controls['u_email'].hasError">
+            <input matInput placeholder="Email address" formControlName="email">
+            <mat-error *ngIf="addressForm.controls['email'].hasError">
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -50,24 +60,15 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Phone" formControlName="u_phone">
-            <mat-error *ngIf="addressForm.controls['u_phone'].hasError">
+            <input matInput placeholder="Phone #" formControlName="phone">
+            <mat-error *ngIf="addressForm.controls['phone'].hasError">
               Phone number is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Name" formControlName="u_name">
-            <mat-error *ngIf="addressForm.controls['u_name'].hasError('required')">
-              Name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
+      
+      <!-- <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
             <textarea matInput placeholder="Address" formControlName="u_street_address"></textarea>
@@ -120,14 +121,34 @@
             <mat-hint align="end">{{u_zip.value.length}} / 5</mat-hint>
           </mat-form-field>
         </div>
+      </div> -->
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="wider">
+            <input matInput placeholder="Event Duration" formControlName="duration">
+            <!-- <mat-error *ngIf="addressForm.controls['duration'].hasError">
+              Phone number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="wider">
+            <input matInput placeholder="Number of attendees" formControlName="attendees">
+            <!-- <mat-error *ngIf="addressForm.controls['duration'].hasError">
+              Phone number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <textarea matInput type="text" maxlength="799" formControlName="u_description"
-              placeholder="Description"></textarea>
-            <mat-error *ngIf="addressForm.controls['u_description'].hasError('maxlength')">
-              Maximum length is 800 characters
+            <textarea matInput type="text" maxlength="499" formControlName="description"
+              placeholder="Event Description"></textarea>
+            <mat-error *ngIf="addressForm.controls['description'].hasError('maxlength')">
+              Maximum length is 500 characters
             </mat-error>
           </mat-form-field>
         </div>
