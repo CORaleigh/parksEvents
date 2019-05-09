@@ -89,6 +89,8 @@ THE SOFTWARE.
 
 @angular/material/card
 
+@angular/material/core
+
 @angular/material/datepicker
 
 @angular/material/dialog
@@ -100,6 +102,8 @@ THE SOFTWARE.
 @angular/material/menu
 
 @angular/material/progress-bar
+
+@angular/material/select
 
 @angular/material/toolbar
 
